@@ -45,7 +45,7 @@ def app():
             second_extra_time = 0
 
             # Open the json file, copy its data, and then immediately close the json file
-            with open(eventsFile, encoding='utf-8') as jsonFile:
+            with open(directory + eventsFile, encoding='utf-8') as jsonFile:
                 jsonData = json.load(jsonFile)
                 jsonFile.close()
 
@@ -641,7 +641,7 @@ def app():
             # Variable to check the home team
             isHomeTeam = False
             # Open the json file, copy its data, and then immediately close the json file
-            with open(xgoalFile, encoding='utf-8') as jsonFile:
+            with open(directory + xgoalFile, encoding='utf-8') as jsonFile:
                 jsonData = json.load(jsonFile)
                 jsonFile.close()
 
@@ -1060,7 +1060,7 @@ def app():
 
             isHomeTeam = False
             # Open the json file, copy its data, and then immediately close the json file
-            with open(passnetworkFile, encoding='utf-8') as jsonFile:
+            with open(directory + passnetworkFile, encoding='utf-8') as jsonFile:
                 jsonData = json.load(jsonFile)
                 jsonFile.close()
 
