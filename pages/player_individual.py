@@ -64,7 +64,7 @@ def app():
     statsFile = ''
 
     if (competitionOption == '2022 World Cup Asian Qualifiers'):
-        directory = 'D:/Libraries/Documents/Python/Football-related/Data/Vietnam matches/2022 WC Asian Qualifiers/'
+        directory = 'data/2022 World Cup Asian Qualifiers/'
 
         if (matchOption == '3 September 2021 - Saudi Arabia 3-1 Vietnam'):
             xgoalFile = 'KSA_VIE_xgoal.json'
