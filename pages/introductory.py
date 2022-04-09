@@ -24,7 +24,7 @@ def app():
     #     "-Choose **Team's performance** for data and visualisations about Vietnam's national team."
     # )
     st.markdown(
-        "-Choose **Player's performance** for data and visualisations about players who have played in either or both competitions."
+        "-Choose **Player's data** for data and visualisations about players who have played in either or both competitions."
     )
     st.markdown(
         "-Choose **Match analysis** for data and visualisations from each of Vietnam's matches in both competitions."
@@ -32,6 +32,10 @@ def app():
     st.subheader("How to save visualisation")
     st.markdown(
         "Just right click on the visualisation and choose 'Save image as', and you are done!"
+    )
+    st.subheader("Bug reporting")
+    st.markdown(
+        "To report a bug, you can send me a DM at @dgouilard on Twitter, or send me an email at daohoang.thai@gmail.com with the subject 'Data App Bug'. I will try to reply to you and log the bug as soon as I can."
     )
 
     st.header("Update log")
