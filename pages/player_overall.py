@@ -14,25 +14,6 @@ def app():
     # Page title
     st.title("Player's overall data")
 
-    # Select box to choose competition
-    competitionOption = st.radio(
-        label='Choose competition',
-        options=('2022 World Cup Asian Qualifiers',
-                 'AFF Cup 2020',
-                 'All competitions'),
-        index=0
-    )
-
-    # Buttons to select player's position
-    positionOption = st.radio(
-        label="Choose player's position",
-        options=('Goalkeeper',
-                 'Defender',
-                 'Midfielder',
-                 'Attacker'),
-        index=0
-    )
-
     wcDirectory = 'data/2022 World Cup Asian Qualifiers/'
     affDirectory = 'data/AFF Cup 2020/'
 
@@ -69,7 +50,7 @@ def app():
     # Import the fonts from the same folder as this code
     robotoRegular = fm.FontProperties(fname='./Roboto-Regular.ttf')
     robotoBold = fm.FontProperties(fname='./Roboto-Bold.ttf')
-
+    
     def playersListExtractor(directory1, files_list1, directory2, files_list2, chosenPosition):
 
         playersList = pd.DataFrame()
@@ -237,75 +218,98 @@ def app():
             return playersList
         else:
             return playersList
-
-    goalkeepers = pd.DataFrame()
-    defenders = pd.DataFrame()
-    midfielders = pd.DataFrame()
-    attackers = pd.DataFrame()
-
-    if (competitionOption == '2022 World Cup Asian Qualifiers'):
-
-        goalkeepers = playersListExtractor(
-            wcDirectory, wcStatsList, '', '', ['Goalkeeper'])
-        defenders = playersListExtractor(wcDirectory, wcStatsList, '', '', [
-                                         'Defender', 'Wing Back'])
-        midfielders = playersListExtractor(
-            wcDirectory, wcStatsList, '', '', ['Midfielder'])
-        attackers = playersListExtractor(
-            wcDirectory, wcStatsList, '', '', ['Striker', 'Attacker'])
-
-    elif (competitionOption == 'AFF Cup 2020'):
-
-        goalkeepers = playersListExtractor(
-            affDirectory, affStatsList, '', '', ['Goalkeeper'])
-        defenders = playersListExtractor(affDirectory, affStatsList, '', '', [
-                                         'Defender', 'Wing Back'])
-        midfielders = playersListExtractor(
-            affDirectory, affStatsList, '', '', ['Midfielder'])
-        attackers = playersListExtractor(
-            affDirectory, affStatsList, '', '', ['Striker', 'Attacker'])
-
-    elif (competitionOption == 'All competitions'):
-
-        goalkeepers = playersListExtractor(
-            wcDirectory, wcStatsList, affDirectory, affStatsList, ['Goalkeeper'])
-        defenders = playersListExtractor(
-            wcDirectory, wcStatsList, affDirectory, affStatsList, ['Defender', 'Wing Back'])
-        midfielders = playersListExtractor(
-            wcDirectory, wcStatsList, affDirectory, affStatsList, ['Midfielder'])
-        attackers = playersListExtractor(
-            wcDirectory, wcStatsList, affDirectory, affStatsList, ['Striker', 'Attacker'])
-
-    if (positionOption == 'Goalkeeper'):
-
-        playerOption = st.selectbox(
-            label='Players list',
-            options=(goalkeepers['playerName']),
-            index=0
-        )
-    elif (positionOption == 'Defender'):
-
-        playerOption = st.selectbox(
-            label='Players list',
-            options=(defenders['playerName']),
+    
+    col1, col2 = st.columns(2)
+    
+    with col1:
+    
+        # Select box to choose competition
+        competitionOption = st.radio(
+            label='Choose competition',
+            options=('2022 World Cup Asian Qualifiers',
+                     'AFF Cup 2020',
+                     'All competitions'),
             index=0
         )
 
-    elif (positionOption == 'Midfielder'):
-
-        playerOption = st.selectbox(
-            label='Players list',
-            options=(midfielders['playerName']),
+        # Buttons to select player's position
+        positionOption = st.radio(
+            label="Choose player's position",
+            options=('Goalkeeper',
+                     'Defender',
+                     'Midfielder',
+                     'Attacker'),
             index=0
         )
 
-    elif (positionOption == 'Attacker'):
+        goalkeepers = pd.DataFrame()
+        defenders = pd.DataFrame()
+        midfielders = pd.DataFrame()
+        attackers = pd.DataFrame()
 
-        playerOption = st.selectbox(
-            label='Players list',
-            options=(attackers['playerName']),
-            index=0
-        )
+        if (competitionOption == '2022 World Cup Asian Qualifiers'):
+
+            goalkeepers = playersListExtractor(
+                wcDirectory, wcStatsList, '', '', ['Goalkeeper'])
+            defenders = playersListExtractor(wcDirectory, wcStatsList, '', '', [
+                                             'Defender', 'Wing Back'])
+            midfielders = playersListExtractor(
+                wcDirectory, wcStatsList, '', '', ['Midfielder'])
+            attackers = playersListExtractor(
+                wcDirectory, wcStatsList, '', '', ['Striker', 'Attacker'])
+
+        elif (competitionOption == 'AFF Cup 2020'):
+
+            goalkeepers = playersListExtractor(
+                affDirectory, affStatsList, '', '', ['Goalkeeper'])
+            defenders = playersListExtractor(affDirectory, affStatsList, '', '', [
+                                             'Defender', 'Wing Back'])
+            midfielders = playersListExtractor(
+                affDirectory, affStatsList, '', '', ['Midfielder'])
+            attackers = playersListExtractor(
+                affDirectory, affStatsList, '', '', ['Striker', 'Attacker'])
+
+        elif (competitionOption == 'All competitions'):
+
+            goalkeepers = playersListExtractor(
+                wcDirectory, wcStatsList, affDirectory, affStatsList, ['Goalkeeper'])
+            defenders = playersListExtractor(
+                wcDirectory, wcStatsList, affDirectory, affStatsList, ['Defender', 'Wing Back'])
+            midfielders = playersListExtractor(
+                wcDirectory, wcStatsList, affDirectory, affStatsList, ['Midfielder'])
+            attackers = playersListExtractor(
+                wcDirectory, wcStatsList, affDirectory, affStatsList, ['Striker', 'Attacker'])
+
+        if (positionOption == 'Goalkeeper'):
+
+            playerOption = st.selectbox(
+                label='Players list',
+                options=(goalkeepers['playerName']),
+                index=0
+            )
+        elif (positionOption == 'Defender'):
+
+            playerOption = st.selectbox(
+                label='Players list',
+                options=(defenders['playerName']),
+                index=0
+            )
+
+        elif (positionOption == 'Midfielder'):
+
+            playerOption = st.selectbox(
+                label='Players list',
+                options=(midfielders['playerName']),
+                index=0
+            )
+
+        elif (positionOption == 'Attacker'):
+
+            playerOption = st.selectbox(
+                label='Players list',
+                options=(attackers['playerName']),
+                index=0
+            )
 
     # Split the chosen option to get the player's name
     userOption = str(playerOption).split(" -")
@@ -353,48 +357,50 @@ def app():
     touch_type = 0
     x_start = 0
     y_start = 0
+    
+    with col2:
 
-    # Radio buttons to choose which visualisation to display
-    vizOption = st.radio(
-        label='Visualisation on display',
-        options=("Touch map", "Individual actions"),
-        index=0
-    )
-
-    # Detailed options for the visualisations
-    if (vizOption == 'Touch map'):
-
-        st.markdown('Touch map options')
-        yesPasses = st.checkbox(
-            label='Passes',
-            value=True
-        )
-        yesDefActions = st.checkbox(
-            label='Defensive actions',
-            value=True
-        )
-        yesShots = st.checkbox(
-            label='Shots',
-            value=True
-        )
-        yesDribbles = st.checkbox(
-            label='Dribbles',
-            value=True
-        )
-        yesLostPos = st.checkbox(
-            label='Lost possessions',
-            value=True
-        )
-
-    elif (vizOption == 'Individual actions'):
-
-        touchOption = st.radio(
-            label='Individual actions options',
-            options=("Shots",
-                     "Passes",
-                     "Crosses"),
+        # Radio buttons to choose which visualisation to display
+        vizOption = st.radio(
+            label='Visualisation on display',
+            options=("Touch map", "Individual actions"),
             index=0
         )
+
+        # Detailed options for the visualisations
+        if (vizOption == 'Touch map'):
+
+            st.markdown('Touch map options')
+            yesPasses = st.checkbox(
+                label='Passes',
+                value=True
+            )
+            yesDefActions = st.checkbox(
+                label='Defensive actions',
+                value=True
+            )
+            yesShots = st.checkbox(
+                label='Shots',
+                value=True
+            )
+            yesDribbles = st.checkbox(
+                label='Dribbles',
+                value=True
+            )
+            yesLostPos = st.checkbox(
+                label='Lost possessions',
+                value=True
+            )
+
+        elif (vizOption == 'Individual actions'):
+
+            touchOption = st.radio(
+                label='Individual actions options',
+                options=("Shots",
+                         "Passes",
+                         "Crosses"),
+                index=0
+            )
 
     with st.spinner("The app is trying its hardest to bring you the best viz!"):
 
