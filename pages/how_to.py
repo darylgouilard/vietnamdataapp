@@ -12,7 +12,7 @@ mpl.rcParams['figure.dpi'] = 300
 
 def app():
 
-    directory = 'https://github.com/darylgouilard/vietnamdataapp/tree/main/data/2022%20World%20Cup%20Asian%20Qualifiers'
+    directory = 'https://github.com/darylgouilard/vietnamdataapp/tree/main/data/2022%20World%20Cup%20Asian%20Qualifiers/'
     xgoalFile = 'JPN_VIE_xgoal_stats.json'
     eventsFile = 'JPN_VIE_events.json'
     passnetworkFile = 'JPN_VIE_pass_matrix.json'
