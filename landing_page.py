@@ -6,7 +6,7 @@ from pages import introductory, how_to, player_overall, player_individual, match
 
 menu_items = {
     "Get help": None,
-    "Report a bug": "mailto:daohoang.thai@gmail.com",
+    "Report a bug": None,
     "About": "Created by Daryl - @dgouilard on Twitter."
 }
 
