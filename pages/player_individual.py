@@ -13,294 +13,294 @@ def app():
 
     # Page title
     st.title("Player's performance")
-
-    # Select box to choose competition
-    competitionOption = st.radio(
-        label='Choose competition',
-        options=('2022 World Cup Asian Qualifiers',
-                 'AFF Cup 2020'),
-        index=0
-    )
-
-    if (competitionOption == '2022 World Cup Asian Qualifiers'):
-        # Select box to choose current displaying match
-        matchOption = st.selectbox(
-            label='Choose match to display visualisations',
-            options=('3 September 2021 - Saudi Arabia 3-1 Vietnam',
-                     '7 September 2021 - Vietnam 0-1 Australia',
-                     '8 October 2021 - China 3-2 Vietnam',
-                     '13 October 2021 - Oman 3-1 Vietnam',
-                     '11 November 2021 - Vietnam 0-1 Japan',
-                     '16 November 2021 - Vietnam 0-1 Saudi Arabia',
-                     '27 January 2022 - Australia 4-0 Vietnam',
-                     '1 February 2022 - Vietnam 3-1 China',
-                     '24 March 2022 - Vietnam 0-1 Oman',
-                     '29 March 2022 - Japan 1-1 Vietnam'),
-            index=0
-        )
-    elif (competitionOption == 'AFF Cup 2020'):
-        matchOption = st.selectbox(
-            label='Choose match to display visualisations',
-            options=('6 December 2021 - Laos 0-2 Vietnam',
-                     '12 December 2021 - Vietnam 3-0 Malaysia',
-                     '15 December 2021 - Indonesia 0-0 Vietnam',
-                     '19 December 2021 - Vietnam 4-0 Cambodia',
-                     '23 December 2021 - Vietnam 0-2 Thailand',
-                     '26 December 2021 - Thailand 0-0 Vietnam'),
+    
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        
+        # Select box to choose competition
+        competitionOption = st.radio(
+            label='Choose competition',
+            options=('2022 World Cup Asian Qualifiers',
+                     'AFF Cup 2020'),
             index=0
         )
 
-    # Variables to store match and team's information
-    matchName = ""
-    compName = ""
-    homeTeamId = ""
-    awayTeamId = ""
-    homeTeam = ""
-    awayTeam = ""
+        if (competitionOption == '2022 World Cup Asian Qualifiers'):
+            # Select box to choose current displaying match
+            matchOption = st.selectbox(
+                label='Choose match to display visualisations',
+                options=('3 September 2021 - Saudi Arabia 3-1 Vietnam',
+                         '7 September 2021 - Vietnam 0-1 Australia',
+                         '8 October 2021 - China 3-2 Vietnam',
+                         '13 October 2021 - Oman 3-1 Vietnam',
+                         '11 November 2021 - Vietnam 0-1 Japan',
+                         '16 November 2021 - Vietnam 0-1 Saudi Arabia',
+                         '27 January 2022 - Australia 4-0 Vietnam',
+                         '1 February 2022 - Vietnam 3-1 China',
+                         '24 March 2022 - Vietnam 0-1 Oman',
+                         '29 March 2022 - Japan 1-1 Vietnam'),
+                index=0
+            )
+        elif (competitionOption == 'AFF Cup 2020'):
+            matchOption = st.selectbox(
+                label='Choose match to display visualisations',
+                options=('6 December 2021 - Laos 0-2 Vietnam',
+                         '12 December 2021 - Vietnam 3-0 Malaysia',
+                         '15 December 2021 - Indonesia 0-0 Vietnam',
+                         '19 December 2021 - Vietnam 4-0 Cambodia',
+                         '23 December 2021 - Vietnam 0-2 Thailand',
+                         '26 December 2021 - Thailand 0-0 Vietnam'),
+                index=0
+            )
 
-    # Assign json files that belong to the chosen match
-    xgoalFile = ''
-    eventsFile = ''
-    statsFile = ''
+        # Assign json files that belong to the chosen match
+        xgoalFile = ''
+        eventsFile = ''
+        statsFile = ''
 
-    if (competitionOption == '2022 World Cup Asian Qualifiers'):
-        directory = 'data/2022 World Cup Asian Qualifiers/'
+        if (competitionOption == '2022 World Cup Asian Qualifiers'):
+            directory = 'data/2022 World Cup Asian Qualifiers/'
 
-        if (matchOption == '3 September 2021 - Saudi Arabia 3-1 Vietnam'):
-            xgoalFile = 'KSA_VIE_xgoal.json'
-            eventsFile = 'KSA_VIE_events.json'
-            statsFile = 'KSA_VIE_stats.json'
-        elif (matchOption == '7 September 2021 - Vietnam 0-1 Australia'):
-            xgoalFile = 'VIE_AUS_xgoal.json'
-            eventsFile = 'VIE_AUS_events.json'
-            statsFile = 'VIE_AUS_stats.json'
-        elif (matchOption == '8 October 2021 - China 3-2 Vietnam'):
-            xgoalFile = 'CHN_VIE_xgoal.json'
-            eventsFile = 'CHN_VIE_events.json'
-            statsFile = 'CHN_VIE_stats.json'
-        elif (matchOption == '13 October 2021 - Oman 3-1 Vietnam'):
-            xgoalFile = 'OMA_VIE_xgoal_stats.json'
-            eventsFile = 'OMA_VIE_events.json'
-            statsFile = 'OMA_VIE_stats.json'
-        elif (matchOption == '11 November 2021 - Vietnam 0-1 Japan'):
-            xgoalFile = 'VIE_JPN_xgoal_stats.json'
-            eventsFile = 'VIE_JPN_events.json'
-            statsFile = 'VIE_JPN_stats.json'
-        elif (matchOption == '16 November 2021 - Vietnam 0-1 Saudi Arabia'):
-            xgoalFile = 'VIE_KSA_xgoal_stats.json'
-            eventsFile = 'VIE_KSA_events.json'
-            statsFile = 'VIE_KSA_stats.json'
-        elif (matchOption == '27 January 2022 - Australia 4-0 Vietnam'):
-            xgoalFile = 'AUS_VIE_xgoal_stats.json'
-            eventsFile = 'AUS_VIE_events.json'
-            statsFile = 'AUS_VIE_stats.json'
-        elif (matchOption == '1 February 2022 - Vietnam 3-1 China'):
-            xgoalFile = 'VIE_CHN_xgoal_stats.json'
-            eventsFile = 'VIE_CHN_events.json'
-            statsFile = 'VIE_CHN_stats.json'
-        elif (matchOption == '24 March 2022 - Vietnam 0-1 Oman'):
-            xgoalFile = 'VIE_OMA_xgoal_stats.json'
-            eventsFile = 'VIE_OMA_events.json'
-            statsFile = 'VIE_OMA_stats.json'
-        elif (matchOption == '29 March 2022 - Japan 1-1 Vietnam'):
-            xgoalFile = 'JPN_VIE_xgoal_stats.json'
-            eventsFile = 'JPN_VIE_events.json'
-            statsFile = 'JPN_VIE_stats.json'
+            if (matchOption == '3 September 2021 - Saudi Arabia 3-1 Vietnam'):
+                xgoalFile = 'KSA_VIE_xgoal.json'
+                eventsFile = 'KSA_VIE_events.json'
+                statsFile = 'KSA_VIE_stats.json'
+            elif (matchOption == '7 September 2021 - Vietnam 0-1 Australia'):
+                xgoalFile = 'VIE_AUS_xgoal.json'
+                eventsFile = 'VIE_AUS_events.json'
+                statsFile = 'VIE_AUS_stats.json'
+            elif (matchOption == '8 October 2021 - China 3-2 Vietnam'):
+                xgoalFile = 'CHN_VIE_xgoal.json'
+                eventsFile = 'CHN_VIE_events.json'
+                statsFile = 'CHN_VIE_stats.json'
+            elif (matchOption == '13 October 2021 - Oman 3-1 Vietnam'):
+                xgoalFile = 'OMA_VIE_xgoal_stats.json'
+                eventsFile = 'OMA_VIE_events.json'
+                statsFile = 'OMA_VIE_stats.json'
+            elif (matchOption == '11 November 2021 - Vietnam 0-1 Japan'):
+                xgoalFile = 'VIE_JPN_xgoal_stats.json'
+                eventsFile = 'VIE_JPN_events.json'
+                statsFile = 'VIE_JPN_stats.json'
+            elif (matchOption == '16 November 2021 - Vietnam 0-1 Saudi Arabia'):
+                xgoalFile = 'VIE_KSA_xgoal_stats.json'
+                eventsFile = 'VIE_KSA_events.json'
+                statsFile = 'VIE_KSA_stats.json'
+            elif (matchOption == '27 January 2022 - Australia 4-0 Vietnam'):
+                xgoalFile = 'AUS_VIE_xgoal_stats.json'
+                eventsFile = 'AUS_VIE_events.json'
+                statsFile = 'AUS_VIE_stats.json'
+            elif (matchOption == '1 February 2022 - Vietnam 3-1 China'):
+                xgoalFile = 'VIE_CHN_xgoal_stats.json'
+                eventsFile = 'VIE_CHN_events.json'
+                statsFile = 'VIE_CHN_stats.json'
+            elif (matchOption == '24 March 2022 - Vietnam 0-1 Oman'):
+                xgoalFile = 'VIE_OMA_xgoal_stats.json'
+                eventsFile = 'VIE_OMA_events.json'
+                statsFile = 'VIE_OMA_stats.json'
+            elif (matchOption == '29 March 2022 - Japan 1-1 Vietnam'):
+                xgoalFile = 'JPN_VIE_xgoal_stats.json'
+                eventsFile = 'JPN_VIE_events.json'
+                statsFile = 'JPN_VIE_stats.json'
 
-    elif (competitionOption == 'AFF Cup 2020'):
-        directory = 'data/AFF Cup 2020/'
+        elif (competitionOption == 'AFF Cup 2020'):
+            directory = 'data/AFF Cup 2020/'
 
-        if (matchOption == '6 December 2021 - Laos 0-2 Vietnam'):
-            xgoalFile = 'LAO_VIE_xgoal_stats.json'
-            eventsFile = 'LAO_VIE_events.json'
-            statsFile = 'LAO_VIE_stats.json'
-        elif (matchOption == '12 December 2021 - Vietnam 3-0 Malaysia'):
-            xgoalFile = 'VIE_MAS_xgoal_stats.json'
-            eventsFile = 'VIE_MAS_events.json'
-            statsFile = 'VIE_MAS_stats.json'
-        elif (matchOption == '15 December 2021 - Indonesia 0-0 Vietnam'):
-            xgoalFile = 'IDN_VIE_xgoal_stats.json'
-            eventsFile = 'IDN_VIE_events.json'
-            statsFile = 'IDN_VIE_stats.json'
-        elif (matchOption == '19 December 2021 - Vietnam 4-0 Cambodia'):
-            xgoalFile = 'VIE_CAM_xgoal_stats.json'
-            eventsFile = 'VIE_CAM_events.json'
-            statsFile = 'VIE_CAM_stats.json'
-        elif (matchOption == '23 December 2021 - Vietnam 0-2 Thailand'):
-            xgoalFile = 'VIE_THA_xgoal_stats.json'
-            eventsFile = 'VIE_THA_events.json'
-            statsFile = 'VIE_THA_stats.json'
-        elif (matchOption == '26 December 2021 - Thailand 0-0 Vietnam'):
-            xgoalFile = 'THA_VIE_xgoal_stats.json'
-            eventsFile = 'THA_VIE_events.json'
-            statsFile = 'THA_VIE_stats.json'
+            if (matchOption == '6 December 2021 - Laos 0-2 Vietnam'):
+                xgoalFile = 'LAO_VIE_xgoal_stats.json'
+                eventsFile = 'LAO_VIE_events.json'
+                statsFile = 'LAO_VIE_stats.json'
+            elif (matchOption == '12 December 2021 - Vietnam 3-0 Malaysia'):
+                xgoalFile = 'VIE_MAS_xgoal_stats.json'
+                eventsFile = 'VIE_MAS_events.json'
+                statsFile = 'VIE_MAS_stats.json'
+            elif (matchOption == '15 December 2021 - Indonesia 0-0 Vietnam'):
+                xgoalFile = 'IDN_VIE_xgoal_stats.json'
+                eventsFile = 'IDN_VIE_events.json'
+                statsFile = 'IDN_VIE_stats.json'
+            elif (matchOption == '19 December 2021 - Vietnam 4-0 Cambodia'):
+                xgoalFile = 'VIE_CAM_xgoal_stats.json'
+                eventsFile = 'VIE_CAM_events.json'
+                statsFile = 'VIE_CAM_stats.json'
+            elif (matchOption == '23 December 2021 - Vietnam 0-2 Thailand'):
+                xgoalFile = 'VIE_THA_xgoal_stats.json'
+                eventsFile = 'VIE_THA_events.json'
+                statsFile = 'VIE_THA_stats.json'
+            elif (matchOption == '26 December 2021 - Thailand 0-0 Vietnam'):
+                xgoalFile = 'THA_VIE_xgoal_stats.json'
+                eventsFile = 'THA_VIE_events.json'
+                statsFile = 'THA_VIE_stats.json'
+    
+        # Variables to store match and team's information
+        matchName = ""
+        compName = ""
+        homeTeamId = ""
+        awayTeamId = ""
+        homeTeam = ""
+        awayTeam = ""
 
-    # Import the fonts from the same folder as this code
-    robotoRegular = fm.FontProperties(fname='./Roboto-Regular.ttf')
-    robotoBold = fm.FontProperties(fname='./Roboto-Bold.ttf')
+        # Open the json file, copy its data, and then immediately close the json file
+        with open(directory + statsFile, encoding='utf-8') as jsonFile:
+            jsonData = json.load(jsonFile)
+            jsonFile.close()
 
-    # Open the json file, copy its data, and then immediately close the json file
-    with open(directory + statsFile, encoding='utf-8') as jsonFile:
-        jsonData = json.load(jsonFile)
-        jsonFile.close()
+        # Create four lists to store players' info
+        goalkeepers = pd.DataFrame()
+        defenders = pd.DataFrame()
+        midfielders = pd.DataFrame()
+        attackers = pd.DataFrame()
 
-    # Create four lists to store players' info
-    goalkeepers = pd.DataFrame()
-    defenders = pd.DataFrame()
-    midfielders = pd.DataFrame()
-    attackers = pd.DataFrame()
+        # Access the lineups file
+        matchInfo = jsonData['matchInfo']
+        liveData = jsonData['liveData']
+        lineups = liveData['lineUp']
 
-    # Access the lineups file
-    matchInfo = jsonData['matchInfo']
-    liveData = jsonData['liveData']
-    lineups = liveData['lineUp']
+        # Gather necessary information
+        matchName = matchInfo['description']
+        compName = matchInfo['competition']['name']
 
-    # Gather necessary information
-    matchName = matchInfo['description']
-    compName = matchInfo['competition']['name']
+        playerInfo = {
+            'playerId': '',
+            'playerName': '',
+            'playingTime': 0
+        }
 
-    playerInfo = {
-        'playerId': '',
-        'playerName': '',
-        'playingTime': 0
-    }
+        if (lineups[0]['contestantId'] == "a9rijkw11dvpb2ysf1pe3zcqo"):
+            players = lineups[0]['player']
+        elif (lineups[1]['contestantId'] == "a9rijkw11dvpb2ysf1pe3zcqo"):
+            players = lineups[1]['player']
 
-    if (lineups[0]['contestantId'] == "a9rijkw11dvpb2ysf1pe3zcqo"):
-        players = lineups[0]['player']
-    elif (lineups[1]['contestantId'] == "a9rijkw11dvpb2ysf1pe3zcqo"):
-        players = lineups[1]['player']
+        for i in range(len(players)):
 
-    for i in range(len(players)):
+            isPlayed = False
 
-        isPlayed = False
+            for stat in players[i]['stat']:
 
-        for stat in players[i]['stat']:
+                if ("minsPlayed" == stat["type"]):
+                    minsPlayed = stat["value"]
+                    isPlayed = True
 
-            if ("minsPlayed" == stat["type"]):
-                minsPlayed = stat["value"]
-                isPlayed = True
+            if (isPlayed == True):
 
-        if (isPlayed == True):
+                playerId = players[i]['playerId']
+                position = ''
+                playerInfo['playerId'] = players[i]['playerId']
+                playerInfo['playerName'] = players[i]['matchName']
+                playerInfo['playingTime'] = minsPlayed
 
-            playerId = players[i]['playerId']
-            position = ''
-            playerInfo['playerId'] = players[i]['playerId']
-            playerInfo['playerName'] = players[i]['matchName']
-            playerInfo['playingTime'] = minsPlayed
-
-            if (players[i]['position'] != "Substitute"):
-                position = players[i]['position']
-            else:
-                position = players[i]['subPosition']
-
-            if (position == 'Goalkeeper'):
-
-                if (len(goalkeepers) == 0):
-                    goalkeepers = goalkeepers.append(
-                        playerInfo, ignore_index=True)
+                if (players[i]['position'] != "Substitute"):
+                    position = players[i]['position']
                 else:
+                    position = players[i]['subPosition']
 
-                    for j in range(len(goalkeepers)):
-                        isplayerinlist = False
-                        if (playerId == goalkeepers['playerId'][j]):
-                            isplayerinlist = True
-                            break
+                if (position == 'Goalkeeper'):
 
-                    if (isplayerinlist == False):
+                    if (len(goalkeepers) == 0):
                         goalkeepers = goalkeepers.append(
                             playerInfo, ignore_index=True)
+                    else:
 
-            elif (position == 'Defender') or (position == 'Wing Back'):
+                        for j in range(len(goalkeepers)):
+                            isplayerinlist = False
+                            if (playerId == goalkeepers['playerId'][j]):
+                                isplayerinlist = True
+                                break
 
-                if (len(defenders) == 0):
-                    defenders = defenders.append(playerInfo, ignore_index=True)
-                else:
+                        if (isplayerinlist == False):
+                            goalkeepers = goalkeepers.append(
+                                playerInfo, ignore_index=True)
 
-                    for j in range(len(defenders)):
-                        isplayerinlist = False
-                        if (playerId == defenders['playerId'][j]):
-                            isplayerinlist = True
-                            break
+                elif (position == 'Defender') or (position == 'Wing Back'):
 
-                    if (isplayerinlist == False):
-                        defenders = defenders.append(
-                            playerInfo, ignore_index=True)
+                    if (len(defenders) == 0):
+                        defenders = defenders.append(playerInfo, ignore_index=True)
+                    else:
 
-            elif (position == 'Midfielder'):
+                        for j in range(len(defenders)):
+                            isplayerinlist = False
+                            if (playerId == defenders['playerId'][j]):
+                                isplayerinlist = True
+                                break
 
-                if (len(midfielders) == 0):
-                    midfielders = midfielders.append(
-                        playerInfo, ignore_index=True)
-                else:
+                        if (isplayerinlist == False):
+                            defenders = defenders.append(
+                                playerInfo, ignore_index=True)
 
-                    for j in range(len(midfielders)):
-                        isplayerinlist = False
-                        if (playerId == midfielders['playerId'][j]):
-                            isplayerinlist = True
-                            break
+                elif (position == 'Midfielder'):
 
-                    if (isplayerinlist == False):
+                    if (len(midfielders) == 0):
                         midfielders = midfielders.append(
                             playerInfo, ignore_index=True)
+                    else:
 
-            elif (position == 'Attacker') or (position == 'Striker'):
+                        for j in range(len(midfielders)):
+                            isplayerinlist = False
+                            if (playerId == midfielders['playerId'][j]):
+                                isplayerinlist = True
+                                break
 
-                if (len(attackers) == 0):
-                    attackers = attackers.append(playerInfo, ignore_index=True)
-                else:
+                        if (isplayerinlist == False):
+                            midfielders = midfielders.append(
+                                playerInfo, ignore_index=True)
 
-                    for j in range(len(attackers)):
-                        isplayerinlist = False
-                        if (playerId == attackers['playerId'][j]):
-                            isplayerinlist = True
-                            break
+                elif (position == 'Attacker') or (position == 'Striker'):
 
-                    if (isplayerinlist == False):
-                        attackers = attackers.append(
-                            playerInfo, ignore_index=True)
+                    if (len(attackers) == 0):
+                        attackers = attackers.append(playerInfo, ignore_index=True)
+                    else:
 
-    positionOption = st.radio(
-        label="Choose player's position",
-        options=("Goalkeeper",
-                 "Defender",
-                 "Midfielder",
-                 "Attacker"
-                 ),
-        index=0
-    )
+                        for j in range(len(attackers)):
+                            isplayerinlist = False
+                            if (playerId == attackers['playerId'][j]):
+                                isplayerinlist = True
+                                break
 
-    if (positionOption == 'Goalkeeper'):
+                        if (isplayerinlist == False):
+                            attackers = attackers.append(
+                                playerInfo, ignore_index=True)
 
-        playerOption = st.selectbox(
-            label='Players list',
-            options=(goalkeepers['playerName'] +
-                     ' - ' + goalkeepers['playingTime'] + ' mins played'),
+        positionOption = st.radio(
+            label="Choose player's position",
+            options=("Goalkeeper",
+                     "Defender",
+                     "Midfielder",
+                     "Attacker"
+                     ),
             index=0
         )
-    elif (positionOption == 'Defender'):
 
-        playerOption = st.selectbox(
-            label='Players list',
-            options=(defenders['playerName'] + ' - ' +
-                     defenders['playingTime'] + ' mins played'),
-            index=0
-        )
-    elif (positionOption == 'Midfielder'):
+        if (positionOption == 'Goalkeeper'):
 
-        playerOption = st.selectbox(
-            label='Players list',
-            options=(midfielders['playerName'] + ' - ' +
-                     midfielders['playingTime'] + ' mins played'),
-            index=0
-        )
-    elif (positionOption == 'Attacker'):
+            playerOption = st.selectbox(
+                label='Players list',
+                options=(goalkeepers['playerName'] +
+                         ' - ' + goalkeepers['playingTime'] + ' mins played'),
+                index=0
+            )
+        elif (positionOption == 'Defender'):
 
-        playerOption = st.selectbox(
-            label='Players list',
-            options=(attackers['playerName'] + ' - ' +
-                     attackers['playingTime'] + ' mins played'),
-            index=0
-        )
+            playerOption = st.selectbox(
+                label='Players list',
+                options=(defenders['playerName'] + ' - ' +
+                         defenders['playingTime'] + ' mins played'),
+                index=0
+            )
+        elif (positionOption == 'Midfielder'):
+
+            playerOption = st.selectbox(
+                label='Players list',
+                options=(midfielders['playerName'] + ' - ' +
+                         midfielders['playingTime'] + ' mins played'),
+                index=0
+            )
+        elif (positionOption == 'Attacker'):
+
+            playerOption = st.selectbox(
+                label='Players list',
+                options=(attackers['playerName'] + ' - ' +
+                         attackers['playingTime'] + ' mins played'),
+                index=0
+            )
 
     # Split the chosen option to get the player's name
     userOption = str(playerOption).split(" -")
@@ -311,6 +311,10 @@ def app():
 
         if (userOption[0] == players[i]['matchName']):
             idOption = players[i]['playerId']
+            
+    # Import the fonts from the same folder as this code
+    robotoRegular = fm.FontProperties(fname='./Roboto-Regular.ttf')
+    robotoBold = fm.FontProperties(fname='./Roboto-Bold.ttf')
 
     # Create two arrays with Opta's type IDs for the touch map
     outfield_typeId = [1, 2, 3, 7, 8, 9, 12,
@@ -325,48 +329,50 @@ def app():
     touch_type = 0
     x_start = 0
     y_start = 0
+    
+    with col2:
 
-    # Radio buttons to choose which visualisation to display
-    vizOption = st.radio(
-        label='Visualisation on display',
-        options=("Touch map", "Individual actions"),
-        index=0
-    )
-
-    # Detailed options for the visualisations
-    if (vizOption == 'Touch map'):
-
-        st.markdown('Touch map options')
-        yesPasses = st.checkbox(
-            label='Passes',
-            value=True
-        )
-        yesDefActions = st.checkbox(
-            label='Defensive actions',
-            value=True
-        )
-        yesShots = st.checkbox(
-            label='Shots',
-            value=True
-        )
-        yesDribbles = st.checkbox(
-            label='Dribbles',
-            value=True
-        )
-        yesLostPos = st.checkbox(
-            label='Lost possessions',
-            value=True
-        )
-
-    elif (vizOption == 'Individual actions'):
-
-        touchOption = st.radio(
-            label='Individual actions options',
-            options=("Shots",
-                     "Passes",
-                     "Crosses"),
+        # Radio buttons to choose which visualisation to display
+        vizOption = st.radio(
+            label='Visualisation on display',
+            options=("Touch map", "Individual actions"),
             index=0
         )
+
+        # Detailed options for the visualisations
+        if (vizOption == 'Touch map'):
+
+            st.markdown('Touch map options')
+            yesPasses = st.checkbox(
+                label='Passes',
+                value=True
+            )
+            yesDefActions = st.checkbox(
+                label='Defensive actions',
+                value=True
+            )
+            yesShots = st.checkbox(
+                label='Shots',
+                value=True
+            )
+            yesDribbles = st.checkbox(
+                label='Dribbles',
+                value=True
+            )
+            yesLostPos = st.checkbox(
+                label='Lost possessions',
+                value=True
+            )
+
+        elif (vizOption == 'Individual actions'):
+
+            touchOption = st.radio(
+                label='Individual actions options',
+                options=("Shots",
+                         "Passes",
+                         "Crosses"),
+                index=0
+            )
 
     # Open the json file, copy its data, and then immediately close the json file
     with open(directory + eventsFile, encoding='utf-8') as jsonFile:
