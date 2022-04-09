@@ -4,6 +4,11 @@ from PIL import Image
 from MultiPage import MultiPage
 from pages import introductory, how_to, player_overall, player_individual, matches_lastmatch
 
+menu_items = {
+    "Get help": None,
+    "Report a bug": "mailto:daohoang.thai@gmail.com",
+    "About": "Created by Daryl - @dgouilard on Twitter."
+
 st.set_page_config(
     page_title='Vietnam NT Data App',
     page_icon='🇻🇳',
