@@ -108,7 +108,7 @@ def app():
             statsFile = 'JPN_VIE_stats.json'
 
     elif (competitionOption == 'AFF Cup 2020'):
-        directory = 'D:/Libraries/Documents/Python/Football-related/Data/Vietnam matches/AFF Cup 2020/'
+        directory = 'data/AFF Cup 2020/'
 
         if (matchOption == '6 December 2021 - Laos 0-2 Vietnam'):
             xgoalFile = 'LAO_VIE_xgoal_stats.json'
