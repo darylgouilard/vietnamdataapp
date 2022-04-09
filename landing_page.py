@@ -8,11 +8,13 @@ menu_items = {
     "Get help": None,
     "Report a bug": "mailto:daohoang.thai@gmail.com",
     "About": "Created by Daryl - @dgouilard on Twitter."
+}
 
 st.set_page_config(
     page_title='Vietnam NT Data App',
     page_icon='🇻🇳',
-    layout="wide"
+    layout="wide",
+    menu_items = menu_items
 )
 
 app = MultiPage()
