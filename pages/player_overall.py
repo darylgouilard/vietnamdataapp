@@ -33,8 +33,8 @@ def app():
         index=0
     )
 
-    wcDirectory = 'D:/Libraries/Documents/Python/Football-related/Data/Vietnam matches/2022 WC Asian Qualifiers/'
-    affDirectory = 'D:/Libraries/Documents/Python/Football-related/Data/Vietnam matches/AFF Cup 2020/'
+    wcDirectory = 'data/2022 World Cup Asian Qualifiers/'
+    affDirectory = 'data/AFF Cup 2020/'
 
     wcStatsList = ['AUS_VIE_stats.json', 'CHN_VIE_stats.json',
                    'JPN_VIE_stats.json', 'KSA_VIE_stats.json',
