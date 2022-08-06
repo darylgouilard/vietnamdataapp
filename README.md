@@ -4,9 +4,9 @@ Welcome to the GitHub file of my Vietnam National Team data app hosted on Stream
 ![Capture](https://user-images.githubusercontent.com/63649138/183244933-df54022e-4ea2-4d75-8c86-11d76304e2c2.PNG)
 
 ## Folders:
--data: The backbone of the app, which is also the folder that contains all the data of Vietnam's 2022 World Cup Asian Qualifiers and AFF Cup 2020 campaigns (with an addition of Vietnam U23's data from the U23 Asian Cup 2022 - the data is not presented in the app, but it is in the folder since I find it relevant and I could not use it for an article that I planned right after Vietnam U23's elimination from the competition)
+-data: The backbone of the app, which is also the folder that contains all the data of Vietnam's 2022 World Cup Asian Qualifiers and AFF Cup 2020 campaigns (with an addition of Vietnam U23's data from the U23 Asian Cup 2022).
 
--pages: This is the folder that contains the Python codes that run each 'Data page' of the app
+-pages: This is the folder that contains the Python codes that run each 'Data page' of the app.
 
 ## Files:
 -MultiPage.py: Originally the code of Prakhar Rathi (https://towardsdatascience.com/creating-multipage-applications-using-streamlit-efficiently-b58a58134030), the code in this file allows the app to run with the multipage functionality.
@@ -16,3 +16,6 @@ Welcome to the GitHub file of my Vietnam National Team data app hosted on Stream
 -landing_page.py: The code for the main page of the app, which imports other Python files from the pages folder to create the multipage app.
 
 -requirements.txt: All of the Python libs that I used to create the app
+
+## Notes:
+-Neither the data nor the vizzes for Vietnam U23's Asian Cup campaign are present in the app, but they are in the folder because I find the data relevant to this repo and I would be really appreciated if someone could find a better use for such data (and the data of other competitions) than my usage for it (I initially had a plan to write a short article to analyse Vietnam U23's performance after their elimination but did not have the time and commitment to do it).
